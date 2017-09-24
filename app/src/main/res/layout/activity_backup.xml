@@ -1,0 +1,356 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:background="#CCE6FF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/bv_lastbackup_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CCE6FF"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/bv_lastbackup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Backup"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bv_lastbackup_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="last backup at...." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_split_color" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bv_backup_cloud_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CCE6FF"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/bv_backup_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_sync_background"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/bv_backupcloud_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Backup Cloud"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_google_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_google_layout_inner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <TextView
+                        android:id="@+id/bv_backup_google_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google Drive"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bv_backup_google_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Backup to Google Drive" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_google_layout_inner2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <CheckBox
+                        android:id="@+id/bv_cb_google"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/view_split_color" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_dropbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_dropbox_layout_inner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <TextView
+                        android:id="@+id/bv_backup_dropbox_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Drop Box"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bv_backup_dropbox_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Backup to Drop Box" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_dropbox_layout_inner2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <CheckBox
+                        android:id="@+id/bv_cb_dropbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/view_split_color" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_onedrive_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_onedrive_layout_inner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <TextView
+                        android:id="@+id/bv_backup_onedrive_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One Drive"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bv_backup_onedrive_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Backup to One Drive" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_onedrive_layout_inner2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <CheckBox
+                        android:id="@+id/bv_cb_onedrive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_split_color" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bv_backup_local_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CCE6FF"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/bv_backup_local_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_sync_background"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/bv_backuplocal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Backup Local"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <Spinner
+                    android:id="@+id/bv_spinner_backp_local"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/local_backup_entries"
+                    android:prompt="@string/local_backup_prompt" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view_split_color" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bv_backup_at_local_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CCE6FF"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/bv_backup_at_local_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_sync_background"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/bv_backup_at_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Backup At"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_at_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <Spinner
+                    android:id="@+id/bv_spinner_backup_at_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/local_backup_time_entries"
+                    android:prompt="@string/backup_at_prompt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bv_backup_time_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/home_back_background"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="100" >
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_time_layout_inner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <TextView
+                        android:id="@+id/bv_backup_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Backup Time"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bv_backup_time_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set time" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bv_backup_time_layout_inner2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <Button
+                        android:id="@+id/bv_bt_backup_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set Time" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

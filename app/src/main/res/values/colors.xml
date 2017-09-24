@@ -1,0 +1,13 @@
+<resources>
+
+    <item name="grad_start" type="color">#FAFAFA</item>
+    <item name="grad_center" type="color">#F2F2F2</item>
+    <item name="grad_end" type="color">#D8D8D8</item>
+    <item name="grad_item" type="color">#FAFAFA</item>
+    <item name="home_image_background" type="color">#FFF</item>
+    <item name="home_back_background" type="color">#95FCBC</item>
+    <item name="home_restore_background" type="color">#9fFCBC</item>
+    <item name="home_sync_background" type="color">#FEB061</item>
+    <item name="view_split_color" type="color">#000</item>
+
+</resources>
