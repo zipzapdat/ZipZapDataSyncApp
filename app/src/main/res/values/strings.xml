@@ -35,4 +35,10 @@
         <item>One Drive</item>
     </string-array>
 
+    <string name="tab_title_backup">BACKUP</string>
+    <string name="tab_title_restore">RESTORE</string>
+
+    <string name="hint_backup_search">Search backup...</string>
+
+
 </resources>

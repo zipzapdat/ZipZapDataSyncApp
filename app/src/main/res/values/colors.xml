@@ -1,13 +1,29 @@
 <resources>
 
-    <item name="grad_start" type="color">#FAFAFA</item>
-    <item name="grad_center" type="color">#F2F2F2</item>
-    <item name="grad_end" type="color">#D8D8D8</item>
-    <item name="grad_item" type="color">#FAFAFA</item>
-    <item name="home_image_background" type="color">#FFF</item>
-    <item name="home_back_background" type="color">#95FCBC</item>
-    <item name="home_restore_background" type="color">#9fFCBC</item>
-    <item name="home_sync_background" type="color">#FEB061</item>
-    <item name="view_split_color" type="color">#000</item>
+        <item name="grad_start" type="color">#FAFAFA</item>
+        <item name="grad_center" type="color">#F2F2F2</item>
+        <item name="grad_end" type="color">#D8D8D8</item>
+        <item name="grad_item" type="color">#FAFAFA</item>
+        <item name="home_image_background" type="color">#FFF</item>
+        <item name="home_back_background" type="color">#95FCBC</item>
+        <item name="home_restore_background" type="color">#9fFCBC</item>
+        <item name="home_sync_background" type="color">#FEB061</item>
+        <item name="view_split_color" type="color">#000</item>
+
+        <color name="colorPrimary">#F44336</color>
+        <color name="colorPrimaryDark">#D32F2F</color>
+        <color name="colorPrimaryLight">#FFCDD2</color>
+
+        <color name="colorAccent">#448AFF</color>
+        <color name="colorAccentDark">#2196F3</color>
+        <color name="colorAccentLight">#BBDEFB</color>
+
+        <color name="grey_hard">#96989A</color>
+        <color name="grey_medium">#BDBFC1</color>
+        <color name="grey_soft">#F5F5F5</color>
+
+        <color name="grey_bg">#EBEFF0</color>
+        <color name="grey_text">#222D31</color>
+
 
 </resources>
