@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.dropbox.client2.android.AndroidAuthSession;
+//import com.dropbox.client2.android.AndroidAuthSession;
 import com.zipzap.util.DropBoxStorage;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -37,28 +37,28 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 		DropBoxStorage dStorage = DropBoxStorage.getInstance(this);
-        AndroidAuthSession session = dStorage.getSession();
-
-        // Dropbox authentication
-        if (session.authenticationSuccessful()) {
-            try {
-                // Mandatory call to complete the auth
-                session.finishAuthentication();
-
-                // Store it locally in our app for later use
-                dStorage.storeAuth(session);
-                
-                //if file doesn't exist write a default value
-				File file = new File(ZipZapProvider.BASE_FILE_PATH
-						+ ZipZapProvider.BASE_FILE_NAME + "1");//ZipZapProvider.APP_KEY);
-                if(!file.exists())
-                	writeDefaultFile();
-                
-                
-            } catch (IllegalStateException e) {
-            	dStorage.showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
-            }
-        }
+//        AndroidAuthSession session = dStorage.getSession();
+//
+//        // Dropbox authentication
+//        if (session.authenticationSuccessful()) {
+//            try {
+//                // Mandatory call to complete the auth
+//                session.finishAuthentication();
+//
+//                // Store it locally in our app for later use
+//                dStorage.storeAuth(session);
+//
+//                //if file doesn't exist write a default value
+//				File file = new File(ZipZapProvider.BASE_FILE_PATH
+//						+ ZipZapProvider.BASE_FILE_NAME + "1");//ZipZapProvider.APP_KEY);
+//                if(!file.exists())
+//                	writeDefaultFile();
+//
+//
+//            } catch (IllegalStateException e) {
+//            	dStorage.showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
+//            }
+//        }
 	}
 		
 	private void writeDefaultFile() {
