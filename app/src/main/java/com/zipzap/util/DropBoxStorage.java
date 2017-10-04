@@ -1,5 +1,7 @@
 package com.zipzap.util;
 
+import android.app.ProgressDialog;
+import android.util.Log;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -21,11 +24,18 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.dropbox.core.v2.files.FileMetadata;
 
+
+import com.zipzap.DownloadFileTask;
+import com.zipzap.DropboxClientFactory;
+import com.zipzap.UploadFileTask;
 import com.zipzap.ZipZapProvider;
 
 
 public class DropBoxStorage {
+
+    private static final String TAG = DropBoxStorage.class.getName();
 	
 	private static DropBoxStorage _instance = null;
 	
@@ -50,19 +60,19 @@ public class DropBoxStorage {
 
 
 	private void downloadFile(FileMetadata file) {
-        final ProgressDialog dialog = new ProgressDialog(this);
+        final ProgressDialog dialog = new ProgressDialog(this.context);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);
         dialog.setMessage("Downloading");
         dialog.show();
 
-        new DownloadFileTask(FilesActivity.this, DropboxClientFactory.getClient(), new DownloadFileTask.Callback() {
+        new DownloadFileTask(context, DropboxClientFactory.getClient(), new DownloadFileTask.Callback() {
             @Override
             public void onDownloadComplete(File result) {
                 dialog.dismiss();
 
                 if (result != null) {
-                    viewFileInExternalApp(result);
+//                    viewFileInExternalApp(result);
                 }
             }
 
@@ -71,7 +81,7 @@ public class DropBoxStorage {
                 dialog.dismiss();
 
                 Log.e(TAG, "Failed to download file.", e);
-                Toast.makeText(FilesActivity.this,
+                Toast.makeText(context,
                         "An error has occurred",
                         Toast.LENGTH_SHORT)
                         .show();
@@ -81,24 +91,26 @@ public class DropBoxStorage {
     }
 
     private void uploadFile(String fileUri) {
-        final ProgressDialog dialog = new ProgressDialog(this);
+        final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);
         dialog.setMessage("Uploading");
         dialog.show();
 
-        new UploadFileTask(this, DropboxClientFactory.getClient(), new UploadFileTask.Callback() {
+        String mPath = "";
+
+        new UploadFileTask(context, DropboxClientFactory.getClient(), new UploadFileTask.Callback() {
             @Override
             public void onUploadComplete(FileMetadata result) {
                 dialog.dismiss();
 
                 String message = result.getName() + " size " + result.getSize() + " modified " +
                         DateFormat.getDateTimeInstance().format(result.getClientModified());
-                Toast.makeText(FilesActivity.this, message, Toast.LENGTH_SHORT)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT)
                         .show();
 
-                // Reload the folder
-                loadData();
+//                // Reload the folder
+//                loadData();
             }
 
             @Override
@@ -106,7 +118,7 @@ public class DropBoxStorage {
                 dialog.dismiss();
 
                 Log.e(TAG, "Failed to upload file.", e);
-                Toast.makeText(FilesActivity.this,
+                Toast.makeText(context,
                         "An error has occurred",
                         Toast.LENGTH_SHORT)
                         .show();

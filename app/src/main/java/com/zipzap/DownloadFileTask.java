@@ -1,4 +1,5 @@
 package com.zipzap;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +18,7 @@ import java.io.OutputStream;
 /**
  * Task to download a file from Dropbox and put it in the Downloads folder
  */
-class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
+public class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
 
     private final Context mContext;
     private final DbxClientV2 mDbxClient;
@@ -29,7 +30,7 @@ class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
         void onError(Exception e);
     }
 
-    DownloadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
+    public DownloadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
         mContext = context;
         mDbxClient = dbxClient;
         mCallback = callback;
@@ -64,10 +65,10 @@ class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
             }
 
             // Download the file.
-            try (OutputStream outputStream = new FileOutputStream(file)) {
-                mDbxClient.files().download(metadata.getPathLower(), metadata.getRev())
+            OutputStream outputStream = new FileOutputStream(file);
+            mDbxClient.files().download(metadata.getPathLower(), metadata.getRev())
                         .download(outputStream);
-            }
+
 
             // Tell android about the file
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

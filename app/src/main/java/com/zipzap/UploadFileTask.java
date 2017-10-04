@@ -18,7 +18,7 @@ import java.io.InputStream;
 /**
  * Async task to upload a file to a directory
  */
-class UploadFileTask extends AsyncTask<String, Void, FileMetadata> {
+public class UploadFileTask extends AsyncTask<String, Void, FileMetadata> {
 
     private final Context mContext;
     private final DbxClientV2 mDbxClient;
@@ -30,7 +30,7 @@ class UploadFileTask extends AsyncTask<String, Void, FileMetadata> {
         void onError(Exception e);
     }
 
-    UploadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
+    public UploadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
         mContext = context;
         mDbxClient = dbxClient;
         mCallback = callback;
@@ -59,13 +59,15 @@ class UploadFileTask extends AsyncTask<String, Void, FileMetadata> {
             // Note - this is not ensuring the name is a valid dropbox file name
             String remoteFileName = localFile.getName();
 
-            try (InputStream inputStream = new FileInputStream(localFile)) {
+            try {
+                InputStream inputStream = new FileInputStream(localFile);
                 return mDbxClient.files().uploadBuilder(remoteFolderPath + "/" + remoteFileName)
                         .withMode(WriteMode.OVERWRITE)
                         .uploadAndFinish(inputStream);
             } catch (DbxException | IOException e) {
                 mException = e;
             }
+
         }
 
         return null;
