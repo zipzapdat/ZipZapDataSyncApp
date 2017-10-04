@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Change this to your app key -->
+    <string name="app_key">jo071zwzq0f1mo7</string>
+    
     <string name="app_name">ZipZap Sync</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_backup">BackupActivity</string>
