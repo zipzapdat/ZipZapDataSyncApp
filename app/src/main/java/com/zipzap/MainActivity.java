@@ -2,7 +2,6 @@ package com.zipzap;
 
 import java.io.File;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.dropbox.core.android.Auth;
-import com.dropbox.core.v2.users.FullAccount;
 
 import com.zipzap.util.DropBoxStorage;
 
@@ -54,19 +52,24 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
         }
 
 	}
-		
+
+	@Override
+	protected void loadData() {
+
+	}
+
 	private void writeDefaultFile() {
 		
 		String filePath = ZipZapProvider.BASE_FILE_PATH
 						+ ZipZapProvider.BASE_FILE_NAME + "1"; // ZipZapProvider.APP_KEY;
 
-		// DropBoxStorage dStorage = DropBoxStorage.getInstance(this);
-		// dStorage.download(filePath, this.getContentResolver());
+		 DropBoxStorage dStorage = DropBoxStorage.getInstance(this);
+		 dStorage.download(filePath, this.getContentResolver());
 		
 		filePath = ZipZapProvider.BASE_FILE_PATH
 				+ ZipZapProvider.BASE_FILE_NAME + "2"; // ZipZapProvider.APP_KEY;
 
-		// dStorage.download(filePath, this.getContentResolver());
+		 dStorage.download(filePath, this.getContentResolver());
 		
 	}
 
