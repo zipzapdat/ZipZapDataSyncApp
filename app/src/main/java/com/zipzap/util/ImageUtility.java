@@ -13,12 +13,13 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
+//import com.dropbox.client2.DropboxAPI;
+//import com.dropbox.client2.android.AndroidAuthSession;
 
 public class ImageUtility {
 
-	public static void saveImage(Bitmap b, String fileName, Context context, DropboxAPI<AndroidAuthSession> mApi)
+	//public static void saveImage(Bitmap b, String fileName, Context context, DropboxAPI<AndroidAuthSession> mApi)
+	public static void saveImage(Bitmap b, String fileName, Context context)
 			throws SaveFileException {
 
 		ContextWrapper cw = new ContextWrapper(context);
