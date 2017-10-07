@@ -134,6 +134,9 @@ public class ZipZapProvider extends ContentProvider {
 		String app_key = "1"; //defaults is file 1
 		if (rowId != null)
 			app_key = rowId;
+
+		String fileName = ZipZapProvider.BASE_FILE_PATH
+				+ ZipZapProvider.BASE_FILE_NAME + app_key;
 		
 		File file = new File(ZipZapProvider.BASE_FILE_PATH
 				+ ZipZapProvider.BASE_FILE_NAME + app_key); // ZipZapProvider.APP_KEY);
@@ -146,8 +149,9 @@ public class ZipZapProvider extends ContentProvider {
 	        	out.write(blob);
 	        	out.close();
 	        	
-	        	DropBoxStorage dStorage = DropBoxStorage.getInstance(this.getContext());
-				dStorage.upload(file);
+	        	DropBoxStorage dStorage = DropBoxStorage.getInstance();
+				//this.getContext()
+				dStorage.upload(getContext(), fileName);
 	            return true;
 	            
 	        } catch (FileNotFoundException e) {
@@ -164,10 +168,11 @@ public class ZipZapProvider extends ContentProvider {
 	
 	private Boolean syncCloudToLocal() {
 		
-		DropBoxStorage dStorage = DropBoxStorage.getInstance(this.getContext());
-		dStorage.download(ZipZapProvider.BASE_FILE_PATH
-				+ ZipZapProvider.BASE_FILE_NAME + "1", //ZipZapProvider.APP_KEY, 
-				this.getContext().getContentResolver());
+		DropBoxStorage dStorage = DropBoxStorage.getInstance();
+		//this.getContext()
+		dStorage.download(this.getContext(), ZipZapProvider.BASE_FILE_PATH
+				+ ZipZapProvider.BASE_FILE_NAME + "1" //ZipZapProvider.APP_KEY,
+				);
 //		dStorage.download(ZipZapProvider.BASE_FILE_PATH
 //				+ ZipZapProvider.BASE_FILE_NAME + "2", //ZipZapProvider.APP_KEY, 
 //				this.getContext().getContentResolver());

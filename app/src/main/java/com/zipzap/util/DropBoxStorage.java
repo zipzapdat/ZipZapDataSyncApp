@@ -1,6 +1,7 @@
 package com.zipzap.util;
 
 import android.app.ProgressDialog;
+import android.os.Environment;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.text.DateFormat;
 
 import android.content.ContentResolver;
@@ -24,12 +27,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 
 
-import com.zipzap.DownloadFileTask;
+import com.dropbox.core.v2.files.WriteMode;
 import com.zipzap.DropboxClientFactory;
-import com.zipzap.UploadFileTask;
+import com.zipzap.UriHelpers;
 import com.zipzap.ZipZapProvider;
 
 
@@ -38,29 +43,32 @@ public class DropBoxStorage {
     private static final String TAG = DropBoxStorage.class.getName();
 	
 	private static DropBoxStorage _instance = null;
-	
-	private Context context;
+
 	private String serverPath;
 	
-	public static DropBoxStorage getInstance(Context context) {
+	public static DropBoxStorage getInstance() {
 		if (_instance == null)
-			_instance = new DropBoxStorage(context, "/Data/");
+			_instance = new DropBoxStorage("/Data/");
 		return _instance;
 	}
 
-	private DropBoxStorage(Context context, String path) {
-		this.context = context;
+	private DropBoxStorage(String path) {
 		this.serverPath = path;
 	}
 
-	public void upload(File mypath) {
+	public void upload(Context context, String path) {
 //		UploadPicture upload = new UploadPicture(mApi, serverPath, mypath);
-//        upload.execute();
+//      upload.execute();
 	}
 
+    public void download(Context context, String path) {
+//		DownloadFile download = new DownloadFile(mApi, path);
+//      download.execute(contentResolver);
+    }
 
-	private void downloadFile(FileMetadata file) {
-        final ProgressDialog dialog = new ProgressDialog(this.context);
+	private void downloadFile(final Context context, FileMetadata file) {
+
+        final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);
         dialog.setMessage("Downloading");
@@ -90,7 +98,8 @@ public class DropBoxStorage {
 
     }
 
-    private void uploadFile(String fileUri) {
+    private void uploadFile(final Context context, String fileUri) {
+
         final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);
@@ -109,8 +118,6 @@ public class DropBoxStorage {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT)
                         .show();
 
-//                // Reload the folder
-//                loadData();
             }
 
             @Override
@@ -125,90 +132,146 @@ public class DropBoxStorage {
             }
         }).execute(fileUri, mPath);
     }
-	
-
-	public void showToast(String msg) {
-		Toast error = Toast.makeText(context, msg, Toast.LENGTH_LONG);
-		error.show();
-	}
 
 
-	public void download(String path, ContentResolver contentResolver) {
-//		DownloadFile download = new DownloadFile(mApi, path);
-//      download.execute(contentResolver);
-	}
-	
+
 	
 	public Boolean syncZipZapDB() {
-//        try {
-//
-//        	String basePath = "/data/data/com.zipzap/";
-//
-//
-//            // Get the metadata for a directory
-//        	Entry entries = mApi.metadata("/Data/", 100, null, true, null);
-//
-//        	for (Entry e : entries.contents) {
-//        	    if (!e.isDeleted) {
-//        	        System.out.println("Files Name : "+e.fileName());
-//        	        try {
-//
-//						FileOutputStream fos = new FileOutputStream(basePath+e.fileName());
-//						mApi.getFile(basePath+e.fileName(), null, fos, null);
-//
-//					} catch (FileNotFoundException e1) {
-//						e1.printStackTrace();
-//					}
-//
-//        	    }
-//        	}
-//
-//        	return true;
-//
-//        } catch (DropboxUnlinkedException e) {
-//            // The AuthSession wasn't properly authenticated or user unlinked.
-//        } catch (DropboxPartialFileException e) {
-//            // We canceled the operation
-////            mErrorMsg = "Download canceled";
-//        } catch (DropboxServerException e) {
-//            // Server-side exception.  These are examples of what could happen,
-//            // but we don't do anything special with them here.
-//            if (e.error == DropboxServerException._304_NOT_MODIFIED) {
-//                // won't happen since we don't pass in revision with metadata
-//            } else if (e.error == DropboxServerException._401_UNAUTHORIZED) {
-//                // Unauthorized, so we should unlink them.  You may want to
-//                // automatically log the user out in this case.
-//            } else if (e.error == DropboxServerException._403_FORBIDDEN) {
-//                // Not allowed to access this
-//            } else if (e.error == DropboxServerException._404_NOT_FOUND) {
-//                // path not found (or if it was the thumbnail, can't be
-//                // thumbnailed)
-//            } else if (e.error == DropboxServerException._406_NOT_ACCEPTABLE) {
-//                // too many entries to return
-//            } else if (e.error == DropboxServerException._415_UNSUPPORTED_MEDIA) {
-//                // can't be thumbnailed
-//            } else if (e.error == DropboxServerException._507_INSUFFICIENT_STORAGE) {
-//                // user is over quota
-//            } else {
-//                // Something else
-//            }
-//            // This gets the Dropbox error, translated into the user's language
-////            mErrorMsg = e.body.userError;
-////            if (mErrorMsg == null) {
-////                mErrorMsg = e.body.error;
-////            }
-//        } catch (DropboxIOException e) {
-//            // Happens all the time, probably want to retry automatically.
-////            mErrorMsg = "Network error.  Try again.";
-//        } catch (DropboxParseException e) {
-//            // Probably due to Dropbox server restarting, should retry
-////            mErrorMsg = "Dropbox error.  Try again.";
-//        } catch (DropboxException e) {
-//            // Unknown error
-////            mErrorMsg = "Unknown error.  Try again.";
-//        }
+
 		return false;
 		
 	}
     
 }
+
+
+
+/**
+ * Task to download a file from Dropbox and put it in the Downloads folder
+ */
+class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
+
+    private final Context mContext;
+    private final DbxClientV2 mDbxClient;
+    private final Callback mCallback;
+    private Exception mException;
+
+    public interface Callback {
+        void onDownloadComplete(File result);
+        void onError(Exception e);
+    }
+
+    public DownloadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
+        mContext = context;
+        mDbxClient = dbxClient;
+        mCallback = callback;
+    }
+
+    @Override
+    protected void onPostExecute(File result) {
+        super.onPostExecute(result);
+        if (mException != null) {
+            mCallback.onError(mException);
+        } else {
+            mCallback.onDownloadComplete(result);
+        }
+    }
+
+    @Override
+    protected File doInBackground(FileMetadata... params) {
+        FileMetadata metadata = params[0];
+        try {
+            File path = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DOWNLOADS);
+            File file = new File(path, metadata.getName());
+
+            // Make sure the Downloads directory exists.
+            if (!path.exists()) {
+                if (!path.mkdirs()) {
+                    mException = new RuntimeException("Unable to create directory: " + path);
+                }
+            } else if (!path.isDirectory()) {
+                mException = new IllegalStateException("Download path is not a directory: " + path);
+                return null;
+            }
+
+            // Download the file.
+            OutputStream outputStream = new FileOutputStream(file);
+            mDbxClient.files().download(metadata.getPathLower(), metadata.getRev())
+                    .download(outputStream);
+
+
+            // Tell android about the file
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(file));
+            mContext.sendBroadcast(intent);
+
+            return file;
+        } catch (DbxException | IOException e) {
+            mException = e;
+        }
+
+        return null;
+    }
+}
+
+
+/**
+ * Async task to upload a file to a directory
+ */
+class UploadFileTask extends AsyncTask<String, Void, FileMetadata> {
+
+    private final Context mContext;
+    private final DbxClientV2 mDbxClient;
+    private final Callback mCallback;
+    private Exception mException;
+
+    public interface Callback {
+        void onUploadComplete(FileMetadata result);
+        void onError(Exception e);
+    }
+
+    public UploadFileTask(Context context, DbxClientV2 dbxClient, Callback callback) {
+        mContext = context;
+        mDbxClient = dbxClient;
+        mCallback = callback;
+    }
+
+    @Override
+    protected void onPostExecute(FileMetadata result) {
+        super.onPostExecute(result);
+        if (mException != null) {
+            mCallback.onError(mException);
+        } else if (result == null) {
+            mCallback.onError(null);
+        } else {
+            mCallback.onUploadComplete(result);
+        }
+    }
+
+    @Override
+    protected FileMetadata doInBackground(String... params) {
+        String localUri = params[0];
+        File localFile = UriHelpers.getFileForUri(mContext, Uri.parse(localUri));
+
+        if (localFile != null) {
+            String remoteFolderPath = params[1];
+
+            // Note - this is not ensuring the name is a valid dropbox file name
+            String remoteFileName = localFile.getName();
+
+            try {
+                InputStream inputStream = new FileInputStream(localFile);
+                return mDbxClient.files().uploadBuilder(remoteFolderPath + "/" + remoteFileName)
+                        .withMode(WriteMode.OVERWRITE)
+                        .uploadAndFinish(inputStream);
+            } catch (DbxException | IOException e) {
+                mException = e;
+            }
+
+        }
+
+        return null;
+    }
+}
+

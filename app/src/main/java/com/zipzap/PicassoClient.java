@@ -21,7 +21,6 @@ public class PicassoClient {
                 .build();
     }
 
-
     public static Picasso getPicasso() {
         return sPicasso;
     }
