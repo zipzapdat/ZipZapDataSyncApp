@@ -37,7 +37,7 @@ public class GoogleDriveStorage {
     public void upload(final File file) {
         // Start by creating a new contents, and setting a callback.
         Log.i(TAG, "Creating new contents.");
-//        final Bitmap image = mBitmapToSave;
+        //        final Bitmap image = mBitmapToSave;
         Drive.DriveApi.newDriveContents(mGoogleApiClient)
                 .setResultCallback(new ResultCallback<DriveContentsResult>() {
 
