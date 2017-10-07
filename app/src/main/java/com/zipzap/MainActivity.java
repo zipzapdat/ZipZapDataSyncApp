@@ -19,8 +19,10 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
 	private LinearLayout mLlRestore;
 	private ImageView mIvSync;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mLlBackup = (LinearLayout) findViewById(R.id.home_backup_layout);
@@ -32,10 +34,6 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
 		mIvSync.setOnClickListener(this);
 
 
-
-        Auth.startOAuth2Authentication(MainActivity.this, getString(R.string.app_key));
-
-		
 	}
 	
 	@Override
@@ -50,6 +48,9 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
 			if(!file.exists())
 				writeDefaultFile();
         }
+        else {
+            Auth.startOAuth2Authentication(MainActivity.this, getString(R.string.app_key));
+        }
 
 	}
 
@@ -63,13 +64,13 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
 		String filePath = ZipZapProvider.BASE_FILE_PATH
 						+ ZipZapProvider.BASE_FILE_NAME + "1"; // ZipZapProvider.APP_KEY;
 
-		 DropBoxStorage dStorage = DropBoxStorage.getInstance(this);
-		 dStorage.download(filePath, this.getContentResolver());
+		 DropBoxStorage dStorage = DropBoxStorage.getInstance();
+		 dStorage.download(this, filePath);
 		
 		filePath = ZipZapProvider.BASE_FILE_PATH
 				+ ZipZapProvider.BASE_FILE_NAME + "2"; // ZipZapProvider.APP_KEY;
 
-		 dStorage.download(filePath, this.getContentResolver());
+        dStorage.download(this, filePath);
 		
 	}
 
@@ -89,6 +90,7 @@ public class MainActivity extends DropboxActivity implements OnClickListener {
 			break;
 
 		case R.id.home_sync_image:
+            Auth.startOAuth2Authentication(MainActivity.this, getString(R.string.app_key));
 			syncDataAndApp();
 			break;
 
