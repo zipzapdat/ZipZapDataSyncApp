@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ZipZapDataSyncApp.iml" filepath="$PROJECT_DIR$/ZipZapDataSyncApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZipZapSyncApp.iml" filepath="$PROJECT_DIR$/ZipZapSyncApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zipzapsdk/zipzapsdk.iml" filepath="$PROJECT_DIR$/zipzapsdk/zipzapsdk.iml" />
     </modules>
   </component>
 </project>
